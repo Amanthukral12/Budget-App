@@ -1,13 +1,18 @@
-const person = {
-    name: 'Aman',
-    age: 21,
-    location: {
-        city: 'Delhi',
-        temp: 42
-    }
-};
+// const person = {
+//     name: 'Aman',
+//     age: 21,
+//     location: {
+//         city: 'Delhi',
+//         temp: 42
+//     }
+// };
 
-const { name, age } = person;
+// const { name, age } = person;
 
 
-console.log(`${name} is ${age}.`);
+// console.log(`${name} is ${age}.`);
+
+
+const address = ['1299', 'Delhi', 'India'];
+
+console.log()
