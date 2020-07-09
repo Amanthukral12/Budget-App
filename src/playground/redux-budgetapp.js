@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux';
-import uuid from 'uuid'
+import uuid from 'uuid';
 
 const addExpense = (
     {
@@ -19,6 +19,16 @@ const addExpense = (
     }
 });
 
+const removeExpense = ({ id } = {}) => ({
+    type: 'REMOVE_EXPENSE',
+    id
+});
+
+const editExpense = (id, updates) => ({
+    type: 'EDIT_EXPENSE',
+    id,
+    updates
+});
 
 
 
@@ -26,6 +36,24 @@ const expensesReducerDefaultState = [];
 
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
     switch (action.type) {
+        case 'ADD_EXPENSE':
+            return [
+                ...state,
+                action.expense
+            ];
+        case 'REMOVE_EXPENSE':
+            return state.filter(({ id }) => id !== action.id);
+        case 'EDIT_EXPENSE':
+            return state.map((expense) => {
+                if (expense.id === action.id) {
+                    return {
+                        ...expense,
+                        ...action.updates
+                    };
+                } else {
+                    return expense;
+                }
+            });
         default:
             return state;
     }
@@ -56,7 +84,13 @@ store.subscribe(() => {
     console.log(store.getState());
 });
 
-store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 1000 }));
+
+store.dispatch(removeExpense({ id: expenseOne.expense.id }));
+
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+
 
 //console.log(store.getState());
 
@@ -75,3 +109,15 @@ const demoState = {
         endDate: undefined
     }
 };
+
+const user = {
+    name: 'Aman',
+    age: 21
+};
+
+console.log({
+    age: 25,
+    ...user,
+    location: 'Delhi'
+
+});
