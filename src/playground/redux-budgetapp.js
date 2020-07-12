@@ -155,7 +155,7 @@ const demoState = {
         id: 'dsdvsdvsdv',
         description: 'hello',
         note: 'hello hi bye',
-        amount: 100,
+        amount: 54500,
         createdAt: 0
     }],
     filters: {
@@ -166,10 +166,7 @@ const demoState = {
     }
 };
 
-const user = {
-    name: 'Aman',
-    age: 21
-};
+
 
 // console.log({
 //     age: 25,
