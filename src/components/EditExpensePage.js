@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const EditExpensePage = (props) => {
     console.log(props);
@@ -8,4 +9,8 @@ const EditExpensePage = (props) => {
         </div>
     );
 };
-export default EditExpensePage;
+
+const mapStateToProps = (state) => {
+
+}
+export default connect()(EditExpensePage);
