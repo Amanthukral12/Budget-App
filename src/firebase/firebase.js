@@ -9,21 +9,19 @@ const database = firebase.database();
 database.ref().set({
     name: 'Aman Thukral',
     age: 26,
-    isSingle: true,
+    job: 'SDE',
     location: {
         city: 'Delhi',
         country: 'India'
-    },
-
+    }
+}).then(() => {
+    console.log('data is saved!');
+}).catch((e) => {
+    console.log('this failed', e);
 });
 
+database.ref().update({
+    job: 'Manager',
+    'location/city': 'Mumbai'
 
-
-database.ref('age').set(27);
-database.ref('location/city').set('Patparganj');
-database.ref('attributes').set({
-    height: 1.5,
-    weight: 75
 });
-
-console.log('data changed');
