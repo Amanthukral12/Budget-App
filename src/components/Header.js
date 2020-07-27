@@ -10,7 +10,7 @@ const Header = ({ startLogout }) => (
           <h1>Budget-App</h1>
         </Link>
 
-        <button onClick={startLogout}>Logout</button>
+        <button className="button button--link" onClick={startLogout}>Logout</button>
       </div>
     </div>
 
