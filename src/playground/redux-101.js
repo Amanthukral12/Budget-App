@@ -1,76 +1,67 @@
 import { createStore } from 'redux';
 
+// Action generators - functions that return action objects
 
 const incrementCount = ({ incrementBy = 1 } = {}) => ({
-    type: 'INCREMENT',
-    incrementBy
+  type: 'INCREMENT',
+  incrementBy
 });
 
 const decrementCount = ({ decrementBy = 1 } = {}) => ({
-    type: 'DECREMENT',
-    decrementBy
+  type: 'DECREMENT',
+  decrementBy
+});
+
+const setCount = ({ count }) => ({
+  type: 'SET',
+  count
 });
 
 const resetCount = () => ({
-    type: 'RESET'
-})
-
-const setCount = ({ count } = {}) => ({
-    type: 'SET',
-    count
-})
-
-const countReduer = (state = { count: 0 }, action) => {
-    switch (action.type) {
-        case 'INCREMENT':
-            return {
-                count: state.count + action.incrementBy
-            };
-        case 'DECREMENT':
-            return {
-                count: state.count - action.decrementBy
-            };
-        case 'SET':
-            return {
-                count: action.count
-            }
-        case 'RESET':
-            return {
-                count: state.count = 0
-            };
-        default:
-            return state;
-    }
-};
-
-const store = createStore(countReduer);
-
-
-const unsubscribe = store.subscribe(() => {
-    console.log(store.getState());
+  type: 'RESET'
 });
 
+// Reducers
+// 1. Reducers are pure functions
+// 2. Never change state or actiton
 
+const countReducer = (state = { count: 0 }, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return {
+        count: state.count + action.incrementBy
+      };
+    case 'DECREMENT':
+      return {
+        count: state.count - action.decrementBy
+      };
+    case 'SET':
+      return {
+        count: action.count
+      };
+    case 'RESET':
+      return {
+        count: 0
+      };
+    default:
+      return state;
+  }
+};
 
-store.dispatch(incrementCount({
-    incrementBy: 5
-}))
+const store = createStore(countReducer);
 
-store.dispatch(incrementCount())
+const unsubscribe = store.subscribe(() => {
+  console.log(store.getState());
+});
 
-store.dispatch(resetCount())
+store.dispatch(incrementCount({ incrementBy: 5 }))
 
-store.dispatch(decrementCount())
+store.dispatch(incrementCount());
 
-store.dispatch(decrementCount({
-    decrementBy: 10
-}))
+store.dispatch(resetCount());
 
-store.dispatch(setCount({
-    count: 1100
-}));
+store.dispatch(decrementCount());
 
+store.dispatch(decrementCount({ decrementBy: 10 }));
 
-
-
-
+store.dispatch(setCount({ count: -100 }));
