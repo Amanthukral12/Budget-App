@@ -13,3 +13,8 @@
 .button--link{
     background: none;
 }
+
+.button--secondary{
+    @extend .button;
+    background: #888888;
+}
